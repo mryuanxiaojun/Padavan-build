@@ -98,14 +98,7 @@ jobs:
       with:
         name: Padavan-packages
         path: /opt/images
-    - name: Upload packages to cowtransfer
-      #id: cowtransfer
-      #if: steps.organize.outputs.status == 'success' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress /opt/images/*.trx 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
+        
     - name: Upload packages to WeTransfer
       #id: wetransfer
       #if: steps.organize.outputs.status == 'success' && !cancelled()
